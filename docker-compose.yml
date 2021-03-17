@@ -1,0 +1,28 @@
+version: '2.3'
+#
+# Example execution:
+# docker-compose run --rm terratools bash
+#
+services:
+  ansibleaws:
+    container_name: terratools
+    image: rendanic/ansibleaws:stable-2.9
+    hostname: ansible-29
+    mem_limit: 1000m
+    working_dir: /git/aws_lightsail_tbr/ansible
+    volumes:
+      - type: bind
+        source: /etc/passwd
+        target: /etc/passwd
+      - type: bind
+        source: /etc/group
+        target: /etc/group
+      - type: bind
+        source: ${HOME}/git
+        target: /git
+      - type: bind
+        source: $HOME
+        target: $HOME
+    environment:
+      - "PS1=$$(whoami)@$$(hostname):$$(pwd) $$ "
+      - "TsERRAGRUNT_DOWNLOAD=${HOME}/.terragrunt_cache"

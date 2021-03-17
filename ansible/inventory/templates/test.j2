@@ -1,0 +1,13 @@
+hostnamectl set-hostname {{ item.name }}
+
+amazon-linux-extras install docker
+systemctl start docker.service 
+systemctl enable docker.service 
+
+curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) \
+     -o /usr/local/bin/docker-compose \
+  && chmod a+x /usr/local/bin/docker-compose
+wget -O /usr/local/bin/ctop https://github.com/bcicen/ctop/releases/download/v0.7.5/ctop-0.7.5-linux-amd64 \
+  && chmod +x /usr/local/bin/ctop
+
+yum install -y git

@@ -1,0 +1,52 @@
+---
+- name: Create Lightsail Instance
+  community.aws.lightsail:
+    state: "{{ item.state | default ('present') }}"
+    name: "{{ item.name }}"
+    region: "{{ item.region }}"
+    zone: "{{ item.zone }}"
+    blueprint_id: "{{ item.blueprint_id }}"
+    bundle_id: "{{ item.bundle_id }}"
+    key_pair_name: "{{ item.key_pair_name | default(omit) }}"
+    user_data: "{% if item.user_data is defined %}{{ lookup('template', '{{ item.user_data }}') }}{% endif %}"
+    wait_timeout: "{{ wait_timeout | default('300') }}"
+  with_items:
+    - "{{ lightsail_hosts }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - lightsail_hosts is defined
+  register: myinst
+  tags: instance
+
+- name: Create Lightsail Firewall
+  command: >
+    aws lightsail put-instance-public-ports \
+      --region {{ item.region }} \
+      --instance-name={{ item.name }} \
+      --port-info {{ nwfilter[:-1] }}
+  with_items:
+    - "{{ lightsail_hosts }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - lightsail_hosts is defined
+  register: awsnwfilter
+  tags: filter
+
+- debug: msg="{{ item.results }}"
+  with_items:
+    - "{{ awsnwfilter }}"
+  loop_control:
+    label: ""
+  tags: filter
+
+- debug: msg="{{ nwfilter }}"
+  with_items:
+    - "{{ lightsail_hosts }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - lightsail_hosts is defined
+  register: awsnwfilter
+  tags: test
