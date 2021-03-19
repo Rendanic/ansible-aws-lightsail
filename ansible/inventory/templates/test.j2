@@ -10,4 +10,10 @@ curl -L https://github.com/docker/compose/releases/latest/download/docker-compos
 wget -O /usr/local/bin/ctop https://github.com/bcicen/ctop/releases/download/v0.7.5/ctop-0.7.5-linux-amd64 \
   && chmod +x /usr/local/bin/ctop
 
+# vnstat
+amazon-linux-extras install epel
+yum install -y vnstat
+sudo -u vnstat /usr/bin/vnstat -u -i eth0
+systemctl start vnstat ; systemctl enable vnstat
+
 yum install -y git
