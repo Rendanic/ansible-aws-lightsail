@@ -1,6 +1,6 @@
 ---
 lightsail_hosts:
-  - name: test
+  - name: "{{ inventory_hostname }}"
     region: eu-central-1
     zone: eu-central-1a
     blueprint_id: amazon_linux_2
@@ -11,4 +11,4 @@ lightsail_hosts:
         toPort: 22
         protocol: tcp
         cidrs:
-          - 87.128.0.0/11       # Deutsche Telekom DSL
+          - 127.0.0.1/32
