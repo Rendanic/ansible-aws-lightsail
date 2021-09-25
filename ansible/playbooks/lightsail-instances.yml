@@ -1,6 +1,6 @@
 # Create AWS Lightsail instances from inventory
 ---
-- hosts: "{{ hostgroup | default('all') }}"
+- hosts: "{{ hostgroup | default('test') }}"
   connection: local
 
   gather_facts: false
