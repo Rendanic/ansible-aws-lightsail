@@ -2,7 +2,8 @@
 ---
 - hosts: "{{ hostgroup | default('all') }}"
   connection: local
-  gather_facts: no
+
+  gather_facts: false
 
   roles:
-    - lightsail-instances
+    - lightsail_instances

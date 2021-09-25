@@ -1,0 +1,2 @@
+---
+nwfilter: "{% for rule in item.network_filter %}fromPort={{ rule.fromPort }},toPort={{ rule.toPort }},protocol={{ rule.protocol }},cidrs={{ rule.cidrs | join(',') }} {% endfor %}"  # noqa yaml
