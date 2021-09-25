@@ -1,0 +1,16 @@
+---
+namespace: rendanic
+name: lightsail_instances
+version: 0.0.3
+
+readme: README.md
+authors:
+  - Thorsten Bruhns <thorsten.bruhns@googlemail.com>
+
+description: Manage AWS Lightsail instances
+license:
+  - GPL-3.0-or-later
+
+repository: https://github.com/Rendanic/ansible-aws-lightsail
+
+issues: https://github.com/Rendanic/ansible-aws-lightsail/issues

@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: lightsail_instances
+  author: Thorsten Bruhns
+  description: Manage AWS Lightsail Instances
+  company: Thorsten Bruhns
+
+  license: license (GPL v3)
+
+  min_ansible_version: 2.9
+
+  galaxy_tags:
+    - AWS
+
+dependencies: []
